@@ -7,7 +7,7 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
-import { Eye, EyeOff } from "lucide-react"; // Importando os ícones
+import { CircleDashed, Eye, EyeOff } from "lucide-react";
 
 const loginSchema = z.object({
   email: z
@@ -28,7 +28,7 @@ export function LoginPage() {
     handleSubmit,
     setValue,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<loginSchemaType>({
     resolver: zodResolver(loginSchema),
   });
@@ -44,7 +44,8 @@ export function LoginPage() {
     setShowPassword((prevState) => !prevState); // Alterna o estado de visibilidade da senha
   };
 
-  const userLogin = (data: loginSchemaType) => {
+  const userLogin = async (data: loginSchemaType) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     console.log(data);
     toast.success("Fazendo login...");
     reset();
@@ -67,7 +68,15 @@ export function LoginPage() {
                 type="email"
                 placeholder="Digite o seu email"
                 required
-                {...register("email")}
+                {...register("email", {
+                  required: true,
+                  validate: (value) => {
+                    if (!value.includes("@")) {
+                      return "O Email tem que incluir @";
+                    }
+                    return true;
+                  },
+                })}
                 onBlur={handleEmailBlur}
               />
               {errors.email && (
@@ -84,7 +93,13 @@ export function LoginPage() {
                 type={showPassword ? "text" : "password"} // Altera o tipo com base no estado
                 placeholder="Digite a sua senha"
                 required
-                {...register("password")}
+                {...register("password", {
+                  required: true,
+                  min: {
+                    value: 6,
+                    message: "Precisa ter no mínimo 6 caracteres!",
+                  },
+                })}
               />
               {errors.password && (
                 <span className="text-red-500 text-sm">
@@ -103,8 +118,15 @@ export function LoginPage() {
               </button>
             </div>
 
-            <Button type="submit" className="w-full">
-              Login
+            <Button disabled={isSubmitting} type="submit" className="w-full">
+              {isSubmitting ? (
+                <CircleDashed
+                  className="motion-reduce:hidden animate-spin"
+                  size="20"
+                />
+              ) : (
+                "Entrar"
+              )}
             </Button>
           </form>
         </CardContent>
