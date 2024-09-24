@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { CircleDashed, Eye, EyeOff } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const loginSchema = z.object({
   email: z
@@ -23,6 +24,7 @@ const loginSchema = z.object({
 type loginSchemaType = z.infer<typeof loginSchema>;
 
 export function LoginPage() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -47,7 +49,8 @@ export function LoginPage() {
   const userLogin = async (data: loginSchemaType) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     console.log(data);
-    toast.success("Fazendo login...");
+    toast.success("Você está logado!✔");
+    navigate("/dashboard");
     reset();
   };
 
