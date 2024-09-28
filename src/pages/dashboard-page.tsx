@@ -1,6 +1,17 @@
+"use client";
+
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import {
   PieChart,
   FileText,
@@ -13,7 +24,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import {
-  BarChart as BarChartComponent,
+  BarChart,
   Bar,
   XAxis,
   YAxis,
@@ -52,6 +63,8 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 export function DashboardPage() {
   const [activeSection, setActiveSection] = useState("overview");
+  const [isExpenseModalOpen, setIsExpenseModalOpen] = useState(false);
+  const [isIncomeModalOpen, setIsIncomeModalOpen] = useState(false);
 
   const renderContent = () => {
     switch (activeSection) {
@@ -97,7 +110,7 @@ export function DashboardPage() {
                 <CardContent>
                   <div className="text-2xl font-bold">$3,000</div>
                   <p className="text-xs text-muted-foreground">
-                    s +7.2% from last month
+                    +7.2% from last month
                   </p>
                 </CardContent>
               </Card>
@@ -121,7 +134,7 @@ export function DashboardPage() {
                 </CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
-                    <BarChartComponent data={monthlyTrend}>
+                    <BarChart data={monthlyTrend}>
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="name" />
                       <YAxis />
@@ -129,7 +142,7 @@ export function DashboardPage() {
                       <Legend />
                       <Bar dataKey="Receitas" fill="#8884d8" />
                       <Bar dataKey="Despesas" fill="#82ca9d" />
-                    </BarChartComponent>
+                    </BarChart>
                   </ResponsiveContainer>
                 </CardContent>
               </Card>
@@ -163,6 +176,38 @@ export function DashboardPage() {
                 </CardContent>
               </Card>
             </div>
+            <Card className="mt-4">
+              <CardHeader>
+                <CardTitle>Recent Transactions</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ScrollArea className="h-[200px]">
+                  {recentTransactions.map((transaction) => (
+                    <div
+                      key={transaction.id}
+                      className="flex justify-between items-center mb-2"
+                    >
+                      <div>
+                        <p className="font-medium">{transaction.description}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {transaction.category}
+                        </p>
+                      </div>
+                      <p
+                        className={
+                          transaction.amount > 0
+                            ? "text-green-500"
+                            : "text-red-500"
+                        }
+                      >
+                        {transaction.amount > 0 ? "+" : "-"}$
+                        {Math.abs(transaction.amount)}
+                      </p>
+                    </div>
+                  ))}
+                </ScrollArea>
+              </CardContent>
+            </Card>
           </>
         );
       case "expenses":
@@ -244,14 +289,88 @@ export function DashboardPage() {
         <div className="flex items-center justify-between p-6">
           <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
           <div className="space-x-2">
-            <Button>
-              <TrendingDown className="mr-2 h-4 w-4" />
-              Adicionar dispesas
-            </Button>
-            <Button>
-              <TrendingUp className="mr-2 h-4 w-4" />
-              Adicionar receitas
-            </Button>
+            <Dialog
+              open={isExpenseModalOpen}
+              onOpenChange={setIsExpenseModalOpen}
+            >
+              <DialogTrigger asChild>
+                <Button onClick={() => setIsExpenseModalOpen(true)}>
+                  <TrendingDown className="mr-2 h-4 w-4" />
+                  Adicionar dispesas
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Adicionar Nova Despesa</DialogTitle>
+                </DialogHeader>
+                <form className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="expense-description">Descrição</Label>
+                    <Input
+                      id="expense-description"
+                      placeholder="Enter description"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="expense-amount">Quantidade</Label>
+                    <Input
+                      id="expense-amount"
+                      type="number"
+                      placeholder="Enter amount"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="expense-category">ID da Categoria</Label>
+                    <Input
+                      id="expense-category"
+                      placeholder="Enter category ID"
+                    />
+                  </div>
+                  <Button type="submit">Salvar</Button>
+                </form>
+              </DialogContent>
+            </Dialog>
+            <Dialog
+              open={isIncomeModalOpen}
+              onOpenChange={setIsIncomeModalOpen}
+            >
+              <DialogTrigger asChild>
+                <Button onClick={() => setIsIncomeModalOpen(true)}>
+                  <TrendingUp className="mr-2 h-4 w-4" />
+                  Adicionar receitas
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Adicionar Nova Receita</DialogTitle>
+                </DialogHeader>
+                <form className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="income-description">Descrição</Label>
+                    <Input
+                      id="income-description"
+                      placeholder="Enter description"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="income-amount">Quantidade</Label>
+                    <Input
+                      id="income-amount"
+                      type="number"
+                      placeholder="Enter amount"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="income-category">ID da Categoria</Label>
+                    <Input
+                      id="income-category"
+                      placeholder="Enter category ID"
+                    />
+                  </div>
+                  <Button type="submit">Salvar</Button>
+                </form>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
         <Separator />
