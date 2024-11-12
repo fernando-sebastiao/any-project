@@ -1,381 +1,240 @@
-"use client";
-
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Card, CardContent } from "@/components/ui/card";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  PieChart,
-  FileText,
-  Tags,
-  DollarSign,
-  TrendingUp,
-  TrendingDown,
-  Wallet,
+  Hotel,
+  Search,
+  Star,
+  MapPin,
+  Building,
+  Users,
+  Info,
+  Facebook,
+  Twitter,
+  Instagram,
 } from "lucide-react";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  PieChart as PieChartComponent,
-  Pie,
-  Cell,
-} from "recharts";
-
-// Mock data (replace with actual data from your backend)
-const recentTransactions = [
-  { id: 1, description: "Groceries", amount: -50, category: "Food" },
-  { id: 2, description: "Salary", amount: 3000, category: "Income" },
-  { id: 3, description: "Restaurant", amount: -30, category: "Food" },
-  { id: 4, description: "Gas", amount: -40, category: "Transportation" },
-];
-
-const expensesByCategory = [
-  { name: "Food", value: 500 },
-  { name: "Transportation", value: 300 },
-  { name: "Entertainment", value: 200 },
-  { name: "Utilities", value: 150 },
-];
-
-const monthlyTrend = [
-  { name: "Jan", Receitas: 4000, Despesas: 3000 },
-  { name: "Feb", Receitas: 3500, Despesas: 2800 },
-  { name: "Mar", Receitas: 4200, Despesas: 3200 },
-  { name: "Apr", Receitas: 3800, Despesas: 3100 },
-];
-
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 export function DashboardPage() {
-  const [activeSection, setActiveSection] = useState("overview");
-  const [isExpenseModalOpen, setIsExpenseModalOpen] = useState(false);
-  const [isIncomeModalOpen, setIsIncomeModalOpen] = useState(false);
-
-  const renderContent = () => {
-    switch (activeSection) {
-      case "overview":
-        return (
-          <>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-4">
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    Balanço total
-                  </CardTitle>
-                  <Wallet className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">$1,234</div>
-                  <p className="text-xs text-muted-foreground">
-                    +20.1% from last month
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    Receitas
-                  </CardTitle>
-                  <TrendingUp className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">$4,000</div>
-                  <p className="text-xs text-muted-foreground">
-                    +10.5% from last month
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    Despesas
-                  </CardTitle>
-                  <TrendingDown className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">$3,000</div>
-                  <p className="text-xs text-muted-foreground">
-                    +7.2% from last month
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Savings</CardTitle>
-                  <DollarSign className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">$1,000</div>
-                  <p className="text-xs text-muted-foreground">
-                    +14.3% from last month
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-            <div className="grid gap-4 md:grid-cols-2">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Trend de Mensalidade</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ResponsiveContainer width="100%" height={300}>
-                    <BarChart data={monthlyTrend}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="name" />
-                      <YAxis />
-                      <Tooltip />
-                      <Legend />
-                      <Bar dataKey="Receitas" fill="#8884d8" />
-                      <Bar dataKey="Despesas" fill="#82ca9d" />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Despesas por Categória</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ResponsiveContainer width="100%" height={300}>
-                    <PieChartComponent>
-                      <Pie
-                        data={expensesByCategory}
-                        cx="50%"
-                        cy="50%"
-                        labelLine={false}
-                        outerRadius={80}
-                        fill="#8884d8"
-                        dataKey="value"
-                      >
-                        {expensesByCategory.map((entry, index) => (
-                          <Cell
-                            key={`cell-${index}`}
-                            fill={COLORS[index % COLORS.length]}
-                          />
-                        ))}
-                      </Pie>
-                      <Tooltip />
-                      <Legend />
-                    </PieChartComponent>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
-            </div>
-            <Card className="mt-4">
-              <CardHeader>
-                <CardTitle>Recent Transactions</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ScrollArea className="h-[200px]">
-                  {recentTransactions.map((transaction) => (
-                    <div
-                      key={transaction.id}
-                      className="flex justify-between items-center mb-2"
-                    >
-                      <div>
-                        <p className="font-medium">{transaction.description}</p>
-                        <p className="text-sm text-muted-foreground">
-                          {transaction.category}
-                        </p>
-                      </div>
-                      <p
-                        className={
-                          transaction.amount > 0
-                            ? "text-green-500"
-                            : "text-red-500"
-                        }
-                      >
-                        {transaction.amount > 0 ? "+" : "-"}$
-                        {Math.abs(transaction.amount)}
-                      </p>
-                    </div>
-                  ))}
-                </ScrollArea>
-              </CardContent>
-            </Card>
-          </>
-        );
-      case "expenses":
-      case "income":
-      case "reports":
-      case "categories":
-        return (
-          <Card>
-            <CardHeader>
-              <CardTitle>
-                {activeSection.charAt(0).toUpperCase() + activeSection.slice(1)}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Content for {activeSection} goes here.</p>
-            </CardContent>
-          </Card>
-        );
-      default:
-        return null;
-    }
-  };
-
   return (
-    <div className="flex h-screen bg-background">
-      {/* Sidebar */}
-      <aside className="w-64 border-r">
-        <ScrollArea className="h-full py-6 pl-6 pr-6">
-          <h2 className="mb-4 text-lg font-semibold tracking-tight">
-            Dashboard
-          </h2>
-          <nav className="space-y-2">
+    <div className="flex flex-col min-h-screen">
+      {/* Navigation */}
+      <header className="fixed top-0 w-full z-50 bg-black/90 text-white">
+        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+          <div className="text-xl font-bold">ViajaFácil</div>
+          <nav className="hidden md:flex items-center gap-6">
+            <a href="#" className="hover:text-primary">
+              Home
+            </a>
+            <a href="#" className="hover:text-primary">
+              Lista
+            </a>
+            <a href="#" className="hover:text-primary">
+              Sobre
+            </a>
             <Button
-              variant={activeSection === "overview" ? "default" : "ghost"}
-              className="w-full justify-start"
-              onClick={() => setActiveSection("overview")}
+              variant="outline"
+              className="text-white border-white hover:bg-white hover:text-black"
             >
-              <PieChart className="mr-2 h-4 w-4" />
-              Overview
-            </Button>
-            <Button
-              variant={activeSection === "expenses" ? "default" : "ghost"}
-              className="w-full justify-start"
-              onClick={() => setActiveSection("expenses")}
-            >
-              <TrendingDown className="mr-2 h-4 w-4" />
-              Despesas
-            </Button>
-            <Button
-              variant={activeSection === "income" ? "default" : "ghost"}
-              className="w-full justify-start"
-              onClick={() => setActiveSection("income")}
-            >
-              <TrendingUp className="mr-2 h-4 w-4" />
-              Receitas
-            </Button>
-            <Button
-              variant={activeSection === "reports" ? "default" : "ghost"}
-              className="w-full justify-start"
-              onClick={() => setActiveSection("reports")}
-            >
-              <FileText className="mr-2 h-4 w-4" />
-              Reports
-            </Button>
-            <Button
-              variant={activeSection === "categories" ? "default" : "ghost"}
-              className="w-full justify-start"
-              onClick={() => setActiveSection("categories")}
-            >
-              <Tags className="mr-2 h-4 w-4" />
-              Categorias
+              Login
             </Button>
           </nav>
-        </ScrollArea>
-      </aside>
+        </div>
+      </header>
 
-      {/* Main content */}
-      <main className="flex-1 overflow-auto">
-        <div className="flex items-center justify-between p-6">
-          <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-          <div className="space-x-2">
-            <Dialog
-              open={isExpenseModalOpen}
-              onOpenChange={setIsExpenseModalOpen}
-            >
-              <DialogTrigger asChild>
-                <Button onClick={() => setIsExpenseModalOpen(true)}>
-                  <TrendingDown className="mr-2 h-4 w-4" />
-                  Adicionar dispesas
-                </Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Adicionar Nova Despesa</DialogTitle>
-                </DialogHeader>
-                <form className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="expense-description">Descrição</Label>
-                    <Input
-                      id="expense-description"
-                      placeholder="Enter description"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="expense-amount">Quantidade</Label>
-                    <Input
-                      id="expense-amount"
-                      type="number"
-                      placeholder="Enter amount"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="expense-category">ID da Categoria</Label>
-                    <Input
-                      id="expense-category"
-                      placeholder="Enter category ID"
-                    />
-                  </div>
-                  <Button type="submit">Salvar</Button>
-                </form>
-              </DialogContent>
-            </Dialog>
-            <Dialog
-              open={isIncomeModalOpen}
-              onOpenChange={setIsIncomeModalOpen}
-            >
-              <DialogTrigger asChild>
-                <Button onClick={() => setIsIncomeModalOpen(true)}>
-                  <TrendingUp className="mr-2 h-4 w-4" />
-                  Adicionar receitas
-                </Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Adicionar Nova Receita</DialogTitle>
-                </DialogHeader>
-                <form className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="income-description">Descrição</Label>
-                    <Input
-                      id="income-description"
-                      placeholder="Enter description"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="income-amount">Quantidade</Label>
-                    <Input
-                      id="income-amount"
-                      type="number"
-                      placeholder="Enter amount"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="income-category">ID da Categoria</Label>
-                    <Input
-                      id="income-category"
-                      placeholder="Enter category ID"
-                    />
-                  </div>
-                  <Button type="submit">Salvar</Button>
-                </form>
-              </DialogContent>
-            </Dialog>
+      {/* Hero Section */}
+      <section className="relative pt-16 h-[500px] bg-gradient-to-r from-blue-500 to-purple-600">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Hotel className="w-32 h-32 text-white opacity-20" />
+        </div>
+        <div className="relative container mx-auto px-4 h-full flex flex-col items-center justify-center text-white">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center">
+            Hora de aventuras e experiências
+          </h1>
+          <div className="w-full max-w-2xl bg-white rounded-lg p-4">
+            <div className="flex gap-4">
+              <Input type="text"  placeholder="Hotéis" className="flex-1 text-black" />
+              <Button className="bg-primary hover:bg-primary/90">
+                <Search className="w-4 h-4 mr-2" />
+                Buscar
+              </Button>
+            </div>
           </div>
         </div>
-        <Separator />
-        <div className="p-6">{renderContent()}</div>
-      </main>
+      </section>
+
+      {/* Price Comparison */}
+      <section className="py-12 container mx-auto px-4">
+        <h2 className="text-2xl font-semibold mb-6">
+          Compare os preços de hotéis disponíveis
+        </h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="bg-muted">
+                <th className="p-4 text-left">Hotel</th>
+                <th className="p-4 text-left">Preço</th>
+                <th className="p-4 text-left">Localização</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[1, 2, 3, 4].map((i) => (
+                <tr key={i} className="border-b">
+                  <td className="p-4">Hotel Águia {i}</td>
+                  <td className="p-4">R$ {299 + i * 50},00</td>
+                  <td className="p-4">Centro</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* Featured Rooms */}
+      <section className="py-12 bg-muted">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl font-semibold mb-6">Quartos em destaque</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <Card key={i}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-center h-48 bg-gray-100 rounded-t-lg">
+                    <Building className="w-24 h-24 text-gray-400" />
+                  </div>
+                  <div className="mt-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="font-semibold">Quarto Deluxe {i}</h3>
+                      <div className="flex items-center">
+                        <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                        <span className="ml-1">4.8</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center text-muted-foreground">
+                      <MapPin className="w-4 h-4 mr-1" />
+                      Centro
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Best Rated Hotels */}
+      <section className="py-12 container mx-auto px-4">
+        <h2 className="text-2xl font-semibold mb-6">
+          Hotéis mais bem avaliados
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[1, 2, 3, 4].map((i) => (
+            <Card key={i}>
+              <CardContent className="p-4">
+                <div className="flex items-center justify-center h-40 bg-gray-100 rounded-t-lg">
+                  <Hotel className="w-20 h-20 text-gray-400" />
+                </div>
+                <div className="mt-4">
+                  <h3 className="font-semibold">Hotel Premium {i}</h3>
+                  <div className="flex items-center text-yellow-400">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star key={star} className="w-4 h-4 fill-current" />
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section className="py-12 bg-muted">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="flex-1">
+              <h2 className="text-2xl font-semibold mb-4">
+                Conosco Viajar é Fácil
+              </h2>
+              <p className="text-muted-foreground mb-4">
+                Descubra a maneira mais simples de planejar suas viagens e
+                encontrar as melhores acomodações para sua estadia.
+              </p>
+              <Button>
+                <Info className="w-4 h-4 mr-2" />
+                Saiba mais
+              </Button>
+            </div>
+            <div className="flex-1 flex justify-center">
+              <Users className="w-64 h-64 text-gray-400" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-black text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+              <h3 className="text-xl font-bold mb-4">ViajaFácil</h3>
+              <p className="text-gray-400">
+                Sua plataforma de reservas de hotéis
+              </p>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Links</h4>
+              <ul className="space-y-2">
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white">
+                    Sobre
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white">
+                    Hotéis
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white">
+                    Contato
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Legal</h4>
+              <ul className="space-y-2">
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white">
+                    Termos
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white">
+                    Privacidade
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Social</h4>
+              <div className="flex space-x-4">
+                <a href="#" className="text-gray-400 hover:text-white">
+                  <Facebook className="w-6 h-6" />
+                </a>
+                <a href="#" className="text-gray-400 hover:text-white">
+                  <Twitter className="w-6 h-6" />
+                </a>
+                <a href="#" className="text-gray-400 hover:text-white">
+                  <Instagram className="w-6 h-6" />
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2024 ViajaFácil. Todos os direitos reservados.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
