@@ -10,8 +10,10 @@ import {
   Twitter,
   Instagram,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export function DashboardPage() {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col min-h-screen">
       {/* Navigation */}
@@ -50,7 +52,10 @@ export function DashboardPage() {
             >
               Login
             </Button>
-            <Button className="bg-primary hover:bg-primary/90 text-white">
+            <Button
+              onClick={() => navigate("/cadastro")}
+              className="bg-primary hover:bg-primary/90 text-white"
+            >
               Cadastre-se
             </Button>
           </div>
