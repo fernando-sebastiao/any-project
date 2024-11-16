@@ -439,6 +439,21 @@ export function DashboardPage() {
 
       {/* Footer */}
       <footer className="bg-black text-white py-12">
+        <div className="flex justify-center items-center mb-7">
+          <div className="w-full max-w-2xl bg-white rounded-lg p-4">
+            <div className="flex gap-4 items-center">
+              <Input
+                type="text"
+                placeholder="Hotéis"
+                className="flex-1 text-black"
+              />
+              <Button className="bg-primary hover:bg-primary/90">
+                <Search className="w-4 h-4 mr-2" />
+                Buscar
+              </Button>
+            </div>
+          </div>
+        </div>
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
