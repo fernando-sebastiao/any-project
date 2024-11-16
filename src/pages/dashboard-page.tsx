@@ -6,9 +6,6 @@ import {
   Search,
   Star,
   MapPin,
-  Building,
-  Users,
-  Info,
   Facebook,
   Twitter,
   Instagram,
@@ -20,27 +17,45 @@ export function DashboardPage() {
       {/* Navigation */}
       <header className="fixed top-0 w-full z-50 bg-black/90 text-white">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="text-xl font-bold">ViajaFácil</div>
-          <nav className="hidden md:flex items-center gap-6">
-            <a href="#" className="hover:text-primary">
-              Home
-            </a>
-            <a href="#" className="hover:text-primary">
-              Lista
-            </a>
-            <a href="#" className="hover:text-primary">
-              Sobre
-            </a>
+          {/* Nome e navegação */}
+          <div className="flex items-center gap-20">
+            <div className="text-[30px] font-bold">ViajaFácil</div>
+            <nav className="flex items-center gap-8">
+              <a
+                href="#"
+                className="hover:bg-white hover:text-black transition-colors rounded-lg p-[5px]"
+              >
+                Home
+              </a>
+              <a
+                href="#"
+                className="hover:bg-white hover:text-black transition-colors rounded-lg p-[5px]"
+              >
+                Lista
+              </a>
+              <a
+                href="#"
+                className="hover:bg-white hover:text-black transition-colors rounded-lg p-[5px]"
+              >
+                Sobre
+              </a>
+            </nav>
+          </div>
+
+          {/* Botões de Login e Cadastro */}
+          <div className="flex items-center gap-4">
             <Button
               variant="outline"
-              className="text-white border-white hover:bg-white hover:text-black"
+              className="text-black border-white hover:bg-white hover:text-black"
             >
               Login
             </Button>
-          </nav>
+            <Button className="bg-primary hover:bg-primary/90 text-white">
+              Cadastre-se
+            </Button>
+          </div>
         </div>
       </header>
-
       {/* Hero Section */}
       <section className="relative pt-16 h-[500px] bg-gradient-to-r from-blue-500 to-purple-600">
         <div className="absolute inset-0 flex items-center justify-center">
@@ -52,7 +67,11 @@ export function DashboardPage() {
           </h1>
           <div className="w-full max-w-2xl bg-white rounded-lg p-4">
             <div className="flex gap-4">
-              <Input type="text"  placeholder="Hotéis" className="flex-1 text-black" />
+              <Input
+                type="text"
+                placeholder="Hotéis"
+                className="flex-1 text-black"
+              />
               <Button className="bg-primary hover:bg-primary/90">
                 <Search className="w-4 h-4 mr-2" />
                 Buscar
@@ -61,7 +80,6 @@ export function DashboardPage() {
           </div>
         </div>
       </section>
-
       {/* Price Comparison */}
       <section className="py-12 container mx-auto px-4">
         <h2 className="text-2xl font-semibold mb-6">
@@ -88,84 +106,333 @@ export function DashboardPage() {
           </table>
         </div>
       </section>
-
       {/* Featured Rooms */}
       <section className="py-12 bg-muted">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl font-semibold mb-6">Quartos em destaque</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <Card key={i}>
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-center h-48 bg-gray-100 rounded-t-lg">
-                    <Building className="w-24 h-24 text-gray-400" />
-                  </div>
-                  <div className="mt-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-semibold">Quarto Deluxe {i}</h3>
-                      <div className="flex items-center">
-                        <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                        <span className="ml-1">4.8</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center text-muted-foreground">
-                      <MapPin className="w-4 h-4 mr-1" />
-                      Centro
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Best Rated Hotels */}
-      <section className="py-12 container mx-auto px-4">
-        <h2 className="text-2xl font-semibold mb-6">
-          Hotéis mais bem avaliados
-        </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[1, 2, 3, 4].map((i) => (
-            <Card key={i}>
+            {/* Quarto 1 */}
+            <Card>
               <CardContent className="p-4">
-                <div className="flex items-center justify-center h-40 bg-gray-100 rounded-t-lg">
-                  <Hotel className="w-20 h-20 text-gray-400" />
+                <div className="flex items-center justify-center h-48 bg-gray-100 rounded-t-lg overflow-hidden">
+                  <img
+                    src="/quartoimg/quarto1.jpg"
+                    alt="Quarto Deluxe 1"
+                    className="object-cover h-full w-full"
+                  />
                 </div>
                 <div className="mt-4">
-                  <h3 className="font-semibold">Hotel Premium {i}</h3>
-                  <div className="flex items-center text-yellow-400">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star key={star} className="w-4 h-4 fill-current" />
-                    ))}
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-semibold">Quarto Deluxe 1</h3>
+                    <div className="flex items-center">
+                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                      <span className="ml-1">4.8</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center text-muted-foreground">
+                    <MapPin className="w-4 h-4 mr-1" />
+                    Centro
                   </div>
                 </div>
               </CardContent>
             </Card>
-          ))}
+
+            {/* Quarto 2 */}
+            <Card>
+              <CardContent className="p-4">
+                <div className="flex items-center justify-center h-48 bg-gray-100 rounded-t-lg overflow-hidden">
+                  <img
+                    src="/quartoimg/quarto2.jpg"
+                    alt="Quarto Deluxe 2"
+                    className="object-cover h-full w-full"
+                  />
+                </div>
+                <div className="mt-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-semibold">Quarto Deluxe 2</h3>
+                    <div className="flex items-center">
+                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                      <span className="ml-1">4.7</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center text-muted-foreground">
+                    <MapPin className="w-4 h-4 mr-1" />
+                    Norte
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Quarto 3 */}
+            <Card>
+              <CardContent className="p-4">
+                <div className="flex items-center justify-center h-48 bg-gray-100 rounded-t-lg overflow-hidden">
+                  <img
+                    src="/quartoimg/quarto3.jpg"
+                    alt="Quarto Deluxe 3"
+                    className="object-cover h-full w-full"
+                  />
+                </div>
+                <div className="mt-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-semibold">Quarto Deluxe 3</h3>
+                    <div className="flex items-center">
+                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                      <span className="ml-1">4.9</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center text-muted-foreground">
+                    <MapPin className="w-4 h-4 mr-1" />
+                    Leste
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Quarto 4 */}
+            <Card>
+              <CardContent className="p-4">
+                <div className="flex items-center justify-center h-48 bg-gray-100 rounded-t-lg overflow-hidden">
+                  <img
+                    src="/quartoimg/quarto4.jpg"
+                    alt="Quarto Deluxe 4"
+                    className="object-cover h-full w-full"
+                  />
+                </div>
+                <div className="mt-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-semibold">Quarto Deluxe 4</h3>
+                    <div className="flex items-center">
+                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                      <span className="ml-1">4.6</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center text-muted-foreground">
+                    <MapPin className="w-4 h-4 mr-1" />
+                    Oeste
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Quarto 5 */}
+            <Card>
+              <CardContent className="p-4">
+                <div className="flex items-center justify-center h-48 bg-gray-100 rounded-t-lg overflow-hidden">
+                  <img
+                    src="/quartoimg/quarto5.jpg"
+                    alt="Quarto Deluxe 5"
+                    className="object-cover h-full w-full"
+                  />
+                </div>
+                <div className="mt-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-semibold">Quarto Deluxe 5</h3>
+                    <div className="flex items-center">
+                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                      <span className="ml-1">4.5</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center text-muted-foreground">
+                    <MapPin className="w-4 h-4 mr-1" />
+                    Sul
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Quarto 6 */}
+            <Card>
+              <CardContent className="p-4">
+                <div className="flex items-center justify-center h-48 bg-gray-100 rounded-t-lg overflow-hidden">
+                  <img
+                    src="/quartoimg/quarto6.jpg"
+                    alt="Quarto Deluxe 6"
+                    className="object-cover h-full w-full"
+                  />
+                </div>
+                <div className="mt-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-semibold">Quarto Deluxe 6</h3>
+                    <div className="flex items-center">
+                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                      <span className="ml-1">4.4</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center text-muted-foreground">
+                    <MapPin className="w-4 h-4 mr-1" />
+                    Centro
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </section>
 
-      {/* About Section */}
+      {/* Para os hoteis*/}
+
       <section className="py-12 bg-muted">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center gap-8">
-            <div className="flex-1">
-              <h2 className="text-2xl font-semibold mb-4">
-                Conosco Viajar é Fácil
-              </h2>
-              <p className="text-muted-foreground mb-4">
-                Descubra a maneira mais simples de planejar suas viagens e
-                encontrar as melhores acomodações para sua estadia.
-              </p>
-              <Button>
-                <Info className="w-4 h-4 mr-2" />
-                Saiba mais
-              </Button>
-            </div>
-            <div className="flex-1 flex justify-center">
-              <Users className="w-64 h-64 text-gray-400" />
-            </div>
+          <h2 className="text-2xl font-semibold mb-6">
+            Hoteis mais bem Avaliados
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Hotel 1 */}
+            <Card>
+              <CardContent className="p-4">
+                <div className="flex items-center justify-center h-48 bg-gray-100 rounded-t-lg overflow-hidden">
+                  <img
+                    src="/hotelimg/hotel1.jpg"
+                    alt="Hotel 1"
+                    className="object-cover h-full w-full"
+                  />
+                </div>
+                <div className="mt-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-semibold">Hotel Vista Azul</h3>
+                    <div className="flex items-center">
+                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                      <span className="ml-1">4.8</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center text-muted-foreground">
+                    <MapPin className="w-4 h-4 mr-1" />
+                    Centro
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Hotel 2 */}
+            <Card>
+              <CardContent className="p-4">
+                <div className="flex items-center justify-center h-48 bg-gray-100 rounded-t-lg overflow-hidden">
+                  <img
+                    src="/hotelimg/hotel2.jpg"
+                    alt="Hotel 2"
+                    className="object-cover h-full w-full"
+                  />
+                </div>
+                <div className="mt-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-semibold">Hotel Sol Nascente</h3>
+                    <div className="flex items-center">
+                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                      <span className="ml-1">4.7</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center text-muted-foreground">
+                    <MapPin className="w-4 h-4 mr-1" />
+                    Norte
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Hotel 3 */}
+            <Card>
+              <CardContent className="p-4">
+                <div className="flex items-center justify-center h-48 bg-gray-100 rounded-t-lg overflow-hidden">
+                  <img
+                    src="/hotelimg/hotel3.jpg"
+                    alt="Hotel 3"
+                    className="object-cover h-full w-full"
+                  />
+                </div>
+                <div className="mt-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-semibold">Hotel Luar Encantado</h3>
+                    <div className="flex items-center">
+                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                      <span className="ml-1">4.9</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center text-muted-foreground">
+                    <MapPin className="w-4 h-4 mr-1" />
+                    Leste
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Hotel 4 */}
+            <Card>
+              <CardContent className="p-4">
+                <div className="flex items-center justify-center h-48 bg-gray-100 rounded-t-lg overflow-hidden">
+                  <img
+                    src="/hotelimg/hotel4.jpg"
+                    alt="Hotel 4"
+                    className="object-cover h-full w-full"
+                  />
+                </div>
+                <div className="mt-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-semibold">Hotel Jardim Tropical</h3>
+                    <div className="flex items-center">
+                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                      <span className="ml-1">4.6</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center text-muted-foreground">
+                    <MapPin className="w-4 h-4 mr-1" />
+                    Oeste
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Hotel 5 */}
+            <Card>
+              <CardContent className="p-4">
+                <div className="flex items-center justify-center h-48 bg-gray-100 rounded-t-lg overflow-hidden">
+                  <img
+                    src="/hotelimg/hotel5.jpg"
+                    alt="Hotel 4"
+                    className="object-cover h-full w-full"
+                  />
+                </div>
+                <div className="mt-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-semibold">Hotel Belo Horizonte</h3>
+                    <div className="flex items-center">
+                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                      <span className="ml-1">4.6</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center text-muted-foreground">
+                    <MapPin className="w-4 h-4 mr-1" />
+                    Oeste
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Hotel 6 */}
+            <Card>
+              <CardContent className="p-4">
+                <div className="flex items-center justify-center h-48 bg-gray-100 rounded-t-lg overflow-hidden">
+                  <img
+                    src="/hotelimg/hotel6.jpg"
+                    alt="Hotel 4"
+                    className="object-cover h-full w-full"
+                  />
+                </div>
+                <div className="mt-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-semibold">Hotel Jardim Rosa</h3>
+                    <div className="flex items-center">
+                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                      <span className="ml-1">4.6</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center text-muted-foreground">
+                    <MapPin className="w-4 h-4 mr-1" />
+                    Oeste
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
