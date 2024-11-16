@@ -17,7 +17,7 @@ export function DashboardPage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Navigation */}
-      <header className="fixed top-0 w-full z-50 bg-black/90 text-white">
+      <header className="fixed top-0 w-full z-50 bg-white/95 text-black">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           {/* Nome e navegação */}
           <div className="flex items-center gap-20">
@@ -31,7 +31,7 @@ export function DashboardPage() {
               </a>
               <a
                 href="#"
-                className="hover:bg-white hover:text-black transition-colors rounded-lg p-[5px]"
+                className="hover:bg-white hover:text-black transition-colors rounded-lg p-[5px] text."
               >
                 Lista
               </a>
@@ -40,6 +40,12 @@ export function DashboardPage() {
                 className="hover:bg-white hover:text-black transition-colors rounded-lg p-[5px]"
               >
                 Sobre
+              </a>
+              <a
+                href="#"
+                className="hover:bg-white hover:text-black transition-colors rounded-lg p-[5px]"
+              >
+                Promoção
               </a>
             </nav>
           </div>
@@ -62,7 +68,13 @@ export function DashboardPage() {
         </div>
       </header>
       {/* Hero Section */}
-      <section className="relative pt-16 h-[500px] bg-gradient-to-r from-blue-500 to-purple-600">
+      {/* Hero Section */}
+      <section
+        className="relative pt-16 h-[500px] bg-cover bg-center object-cover"
+        style={{
+          backgroundImage: "url('/hotelimg/ilha1.jpg')",
+        }}
+      >
         <div className="absolute inset-0 flex items-center justify-center">
           <Hotel className="w-32 h-32 text-white opacity-20" />
         </div>
@@ -85,6 +97,7 @@ export function DashboardPage() {
           </div>
         </div>
       </section>
+
       {/* Price Comparison */}
       <section className="py-12 container mx-auto px-4">
         <h2 className="text-2xl font-semibold mb-6">
