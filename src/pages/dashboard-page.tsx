@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
+import { FaGooglePlay, FaAppStore } from "react-icons/fa";
 import {
   Hotel,
   Search,
@@ -17,7 +18,7 @@ export function DashboardPage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Navigation */}
-      <header className="fixed top-0 w-full z-50 bg-white/95 text-black">
+      <header className="fixed top-0 w-full z-50 bg-white/90 text-black">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           {/* Nome e navegação */}
           <div className="flex items-center gap-20">
@@ -465,6 +466,7 @@ export function DashboardPage() {
         <div className="max-w-md text-center md:text-left mb-8 md:mb-0">
           <h2 className="text-2xl font-semibold text-gray-800">
             Faça uma pergunta ou torne-se parceiro
+            <span className="block mt-3 w-20 border-b-8 border-gray-800 rounded-md"></span>
           </h2>
           <p className="mt-4 text-gray-600">
             Se você tem alguma dúvida ou está interessado em colaborar conosco,
@@ -488,6 +490,28 @@ export function DashboardPage() {
             alt="Ilustração de parceria"
             className="w-full"
           />
+        </div>
+      </section>
+
+      {/* imagem e texto, viaja conosco*/}
+      <section
+        className="relative bg-cover bg-center py-24 px-6"
+        style={{
+          backgroundImage: "url(/hotelimg/study1.jpg)",
+          backgroundSize: "35%", // Diminuindo a imagem para 80% do tamanho da seção
+          backgroundPosition: "center", // Garante que a imagem seja centralizada
+          backgroundRepeat: "no-repeat", // Impede a repetição da imagem
+        }}
+      >
+        <div className="absolute inset-0 bg-black opacity-50"></div>{" "}
+        {/* Sobreposição escura */}
+        <div className="relative z-10 text-left text-white mt-10 ml-6">
+          <h2 className="text-4xl font-bold mb-4">Conosco viajar é fácil</h2>
+          <p className="text-lg mb-6">Viaja conosco</p>
+
+          <button className="bg-black text-white font-semibold py-3 px-8 rounded-md hover:bg-primary/90 transition">
+            Agendar
+          </button>
         </div>
       </section>
 
@@ -558,31 +582,8 @@ export function DashboardPage() {
         </div>
       </section>
 
-      {/* imagem e texto, viaja conosco*/}
-      <section
-        className="relative bg-cover bg-center py-24 px-6"
-        style={{
-          backgroundImage: "url(/hotelimg/study1.jpg)",
-          objectFit: "cover",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat", // Garante que a imagem se ajuste corretamente
-        }}
-      >
-        <div className="absolute inset-0 bg-black opacity-50"></div>{" "}
-        {/* Sobreposição escura */}
-        <div className="relative z-10 text-left text-white mt-10 ml-6">
-          <h2 className="text-4xl font-bold mb-4">Conosco viajar é fácil</h2>
-          <p className="text-lg mb-6">Viaja conosco</p>
-
-          <button className="bg-black text-white font-semibold py-3 px-8 rounded-md hover:bg-primary/90 transition">
-            Agendar
-          </button>
-        </div>
-      </section>
-
       {/* Footer */}
-      <footer className="bg-black text-white py-12">
+      <footer className="bg-gray-300 text-black py-12">
         <div className="flex justify-center items-center mb-7">
           <div className="w-full max-w-2xl bg-white rounded-lg p-4">
             <div className="flex gap-4 items-center">
@@ -601,62 +602,96 @@ export function DashboardPage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-              <h3 className="text-xl font-bold mb-4">ViajaFácil</h3>
-              <p className="text-gray-400">
-                Sua plataforma de reservas de hotéis
-              </p>
+              <h3 className="text-xl font-bold mb-4 text-black">ViajaFácil</h3>
+              <p className="text-black">Sua plataforma de reservas de hotéis</p>
+
+              {/* Ícones Google Play e App Store dentro de botões */}
+              <div className="flex gap-6 mt-6 justify-center">
+                {/* PlayStore Button */}
+                <button className="flex items-center bg-black text-white py-2 px-4 rounded-md hover:bg-gray-700 transition">
+                  <FaGooglePlay className="w-3 h-3 mr-2" />
+                  PlayStore
+                </button>
+
+                {/* App Store Button */}
+                <button className="flex items-center bg-black text-white py-2 px-4 rounded-md hover:bg-gray-700 transition">
+                  <FaAppStore className="w-3 h-3 mr-2" />
+                  App Store
+                </button>
+              </div>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Links</h4>
+              <h4 className="font-semibold mb-4 text-black">Links</h4>
               <ul className="space-y-2">
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-white">
+                  <a href="#" className="text-black hover:text-white">
                     Sobre
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-white">
+                  <a href="#" className="text-black hover:text-white">
                     Hotéis
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-white">
+                  <a href="#" className="text-black hover:text-white">
                     Contato
                   </a>
                 </li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Legal</h4>
+              <h4 className="font-semibold mb-4 text-black">Legal</h4>
               <ul className="space-y-2">
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-white">
+                  <a href="#" className="text-black hover:text-white">
                     Termos
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-white">
+                  <a href="#" className="text-black hover:text-white">
                     Privacidade
                   </a>
                 </li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Social</h4>
-              <div className="flex space-x-4">
-                <a href="#" className="text-gray-400 hover:text-white">
+              <h4 className="font-semibold mb-4 text-black">Social</h4>
+              <div className="mt-6 text-black">
+                <p className="mb-2">Nos contacte:</p>
+                <p className="font-semibold">
+                  <a href="tel:+244937957171" className="hover:text-primary">
+                    +244 937 957 171
+                  </a>
+                </p>
+
+                {/* E-mail */}
+                <p className="mb-2">Ou envie um e-mail para:</p>
+                <p className="font-semibold">
+                  <a
+                    href="mailto:contato@viajafacil.com"
+                    className="hover:text-primary"
+                  >
+                    contato@viajafacil.com
+                  </a>
+                </p>
+              </div>
+
+              {/* Redes Sociais - Ícones */}
+              <div className="flex space-x-4 mt-6">
+                <a href="#" className="text-black hover:text-white">
                   <Facebook className="w-6 h-6" />
                 </a>
-                <a href="#" className="text-gray-400 hover:text-white">
+                <a href="#" className="text-black hover:text-white">
                   <Twitter className="w-6 h-6" />
                 </a>
-                <a href="#" className="text-gray-400 hover:text-white">
+                <a href="#" className="text-black hover:text-white">
                   <Instagram className="w-6 h-6" />
                 </a>
               </div>
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-black">
             <p>&copy; 2024 ViajaFácil. Todos os direitos reservados.</p>
           </div>
         </div>
