@@ -54,7 +54,7 @@ export function DashboardPage() {
           <div className="flex items-center gap-4">
             <Button
               variant="outline"
-              className="text-black border-white hover:bg-white hover:text-black"
+              className="text-black border-white hover:bg-slate-200 hover:text-black"
             >
               Login
             </Button>
@@ -70,7 +70,7 @@ export function DashboardPage() {
       {/* Hero Section */}
       {/* Hero Section */}
       <section
-        className="relative pt-16 h-[500px] bg-cover bg-center object-cover"
+        className="relative pt-16 h-[500px] object-cover-background"
         style={{
           backgroundImage: "url('/hotelimg/ilha1.jpg')",
         }}
@@ -127,7 +127,11 @@ export function DashboardPage() {
       {/* Featured Rooms */}
       <section className="py-12 bg-muted">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl font-semibold mb-6">Quartos em destaque</h2>
+          <h2 className="text-2xl font-semibold mb-6">
+            Quartos em destaque
+            <span className="block mt-3 w-20 border-b-8 border-gray-800 rounded-md"></span>
+          </h2>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Quarto 1 */}
             <Card>
@@ -294,6 +298,7 @@ export function DashboardPage() {
         <div className="container mx-auto px-4">
           <h2 className="text-2xl font-semibold mb-6">
             Hoteis mais bem Avaliados
+            <span className="block mt-3 w-20 border-b-8 border-gray-800 rounded-md"></span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Hotel 1 */}
@@ -452,6 +457,127 @@ export function DashboardPage() {
               </CardContent>
             </Card>
           </div>
+        </div>
+      </section>
+
+      <section className="flex flex-col md:flex-row items-center justify-between bg-white px-6 md:px-16 py-12">
+        {/* Texto */}
+        <div className="max-w-md text-center md:text-left mb-8 md:mb-0">
+          <h2 className="text-2xl font-semibold text-gray-800">
+            Faça uma pergunta ou torne-se parceiro
+          </h2>
+          <p className="mt-4 text-gray-600">
+            Se você tem alguma dúvida ou está interessado em colaborar conosco,
+            estamos aqui para ajudar. Entre em contato conosco e faça parte de
+            algo incrível.
+          </p>
+          <div className="mt-6 flex flex-col sm:flex-row gap-4">
+            <button className="bg-black text-white py-2 px-4 rounded hover:bg-gray-800">
+              Fazer Pergunta
+            </button>
+            <button className="bg-white border border-gray-300 py-2 px-4 rounded hover:bg-gray-100">
+              Tornar-se Parceiro
+            </button>
+          </div>
+        </div>
+
+        {/* Imagem */}
+        <div className="w-full max-w-sm">
+          <img
+            src="/hotelimg/viagem.svg"
+            alt="Ilustração de parceria"
+            className="w-full"
+          />
+        </div>
+      </section>
+
+      {/* Risco abaixo do título */}
+      <div className="w-16 border-b-4 border-gray-800 mt-2 mx-auto"></div>
+
+      <section className="bg-gray-100 py-16 px-6">
+        <h2 className="text-3xl font-bold text-gray-800 mb-8 text-left p-6">
+          Tipos de Hotel
+          <span className="block mt-3 w-20 border-b-8 border-gray-800 rounded-md"></span>
+        </h2>
+        <div className="max-w-7xl mx-auto text-center">
+          {/* Divisão dos ícones */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            {/* Ícone 1 */}
+            <div className="flex flex-col items-center">
+              <div className="w-28 h-28 mb-4">
+                <img
+                  src="/svg/travel1.svg"
+                  alt="Hotel Boutique"
+                  className="w-full h-full"
+                />
+              </div>
+              <p className="text-gray-700">
+                Desfrute de uma experiência única em hotéis boutique, com
+                serviços personalizados e localização privilegiada para explorar
+                os pontos turísticos mais exclusivos.
+              </p>
+            </div>
+
+            {/* Ícone 2 */}
+            <div className="flex flex-col items-center">
+              <div className="w-28 h-28 mb-4">
+                <img
+                  src="/svg/travel2.svg"
+                  alt="Hotel Resort"
+                  className="w-full h-full"
+                />
+              </div>
+              <p className="text-gray-700">
+                Relaxe e rejuvenesça em um resort de luxo, onde você pode
+                desfrutar de atividades recreativas, spa, e restaurantes
+                gourmet, em um ambiente de total conforto.
+              </p>
+            </div>
+
+            {/* Ícone 3 */}
+            <div className="flex flex-col items-center">
+              <div className="w-28 h-28 mb-4">
+                <img
+                  src="/svg/travel3.svg"
+                  alt="Hotel Econômico"
+                  className="w-full h-full"
+                />
+              </div>
+              <p className="text-gray-700">
+                Para quem busca uma opção acessível, os hotéis econômicos
+                oferecem conforto e praticidade, com localização estratégica e
+                opções de serviços simplificados para viajantes inteligentes.
+              </p>
+            </div>
+          </div>
+
+          {/* Botão central */}
+          <button className="bg-black text-white font-semibold py-2.5 px-12 rounded-full hover:bg-zinc-700 transition">
+            Aderir
+          </button>
+        </div>
+      </section>
+
+      {/* imagem e texto, viaja conosco*/}
+      <section
+        className="relative bg-cover bg-center py-24 px-6"
+        style={{
+          backgroundImage: "url(/hotelimg/study1.jpg)",
+          objectFit: "cover",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat", // Garante que a imagem se ajuste corretamente
+        }}
+      >
+        <div className="absolute inset-0 bg-black opacity-50"></div>{" "}
+        {/* Sobreposição escura */}
+        <div className="relative z-10 text-left text-white mt-10 ml-6">
+          <h2 className="text-4xl font-bold mb-4">Conosco viajar é fácil</h2>
+          <p className="text-lg mb-6">Viaja conosco</p>
+
+          <button className="bg-black text-white font-semibold py-3 px-8 rounded-md hover:bg-primary/90 transition">
+            Agendar
+          </button>
         </div>
       </section>
 
